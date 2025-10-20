@@ -12,22 +12,27 @@ export default function AuthCallbackPage() {
   useEffect(() => {
     const handleAuthCallback = async () => {
       try {
-        // 🧩 Si viene con token en la URL (desde el correo)
-        const token = searchParams.get("token");
+        const code = searchParams.get("code");
+        const token = searchParams.get("token"); // compatibilidad antigua
         const type = searchParams.get("type");
 
-        if (token && type === "signup") {
-          // Intercambia el token por sesión activa
-          const { data, error } = await supabase.auth.exchangeCodeForSession(token);
-          if (error) console.error("Error creando sesión desde token:", error);
+        // 🧩 Si el usuario viene del correo de confirmación
+        if ((code || token) && (type === "signup" || type === "magiclink")) {
+          const value = code || token;
+          console.log("Intercambiando código por sesión...", { type, value });
+          const { data, error } = await supabase.auth.exchangeCodeForSession(value);
+          if (error) console.error("Error al crear sesión:", error);
         }
 
-        // ✅ Verifica si ya existe una sesión activa
+        // ✅ Verificar si ya hay sesión activa
         const { data: sessionData } = await supabase.auth.getSession();
-        if (sessionData.session) {
-          // Espera un poco para mostrar pantalla de bienvenida
+        console.log("Sesión actual:", sessionData);
+
+        if (sessionData?.session) {
+          console.log("Sesión válida, redirigiendo al dashboard...");
           setTimeout(() => router.replace("/dashboard"), 2000);
         } else {
+          console.log("No hay sesión, redirigiendo a login...");
           router.replace("/auth/login");
         }
       } catch (error) {
