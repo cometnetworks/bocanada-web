@@ -20,3 +20,13 @@
 body {
   overflow-x: hidden;
 }
+
+/* ✨ Efecto calor sutil */
+@keyframes shimmer {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.1); }
+}
+
+video {
+  animation: shimmer 8s ease-in-out infinite;
+}
