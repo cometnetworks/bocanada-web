@@ -13,10 +13,12 @@ export default function RegisterPage() {
     e.preventDefault();
     setMessage("Procesando...");
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: { emailRedirectTo: "http://localhost:3000/dashboard" },
+      options: {
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard`,
+      },
     });
 
     if (error) setMessage("❌ Error: " + error.message);
