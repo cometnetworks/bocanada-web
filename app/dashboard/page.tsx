@@ -7,34 +7,32 @@ import PointsProgress from "@/components/PointsProgress";
 import Link from "next/link";
 import Image from "next/image";
 import type { User } from "@supabase/supabase-js";
+import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
   const [qr, setQr] = useState("");
   const [coupon, setCoupon] = useState("");
   const [points, setPoints] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     const setupUser = async () => {
       try {
         const { data: { user: authUser } } = await supabase.auth.getUser();
         if (!authUser) {
-          window.location.href = "/auth/login";
-          return;
+          return router.push("/auth/login");
         }
         setUser(authUser);
 
-        // 1. Buscar perfil de usuario
         let { data: userProfile } = await supabase.from("users").select("id, points, qr_code").eq("id", authUser.id).single();
 
-        // 2. Si no hay perfil, crearlo
         if (!userProfile) {
           const { data: newUser, error: insertError } = await supabase.from("users").insert({ id: authUser.id, email: authUser.email, points: 0 }).select().single();
           if (insertError) throw new Error(`Error creating user profile: ${insertError.message}`);
           userProfile = newUser;
         }
 
-        // 3. Manejar el código QR: usar el existente o crear y guardar uno nuevo
         let finalQrCode = userProfile?.qr_code;
         if (!finalQrCode) {
           finalQrCode = `BCN-${authUser.id.slice(0, 6).toUpperCase()}`;
@@ -44,7 +42,6 @@ export default function Dashboard() {
         setQr(finalQrCode);
         setPoints(userProfile?.points || 0);
 
-        // 4. Manejar cupón de bienvenida
         const { data: coupons } = await supabase.from("coupons").select("*").eq("user_id", authUser.id).order("created_at", { ascending: false }).limit(1);
         if (coupons?.length) {
           setCoupon(coupons[0].reward);
@@ -53,17 +50,25 @@ export default function Dashboard() {
           setCoupon("Bebida gratis");
         }
 
+        // Redirigir al sitio público después de 5s (presentación)
+        const redirectTimeout = setTimeout(() => {
+          router.push("/home");
+        }, 5000);
+
+        // Limpiar el timeout si el componente se desmonta
+        return () => clearTimeout(redirectTimeout);
+
       } catch (e) {
         console.error("Error setting up user:", e);
       }
     };
 
     setupUser();
-  }, []);
+  }, [router]);
 
   const logout = async () => {
     await supabase.auth.signOut();
-    window.location.href = "/auth/login";
+    router.push("/auth/login");
   };
 
   return (
