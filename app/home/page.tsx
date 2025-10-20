@@ -113,8 +113,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 py-8 text-center text-sm text-white/60">
-        Bocanada Cocina de Brassa · Horarios: Mar-Dom 1pm–11pm · Mérida, Yucatán
+      <footer className="border-t border-white/10 py-10 text-center text-sm text-white/60">
+        <p>Calle Bahia de Sta. Barbara 64, Ciudad de México</p>
+        <div className="mt-4 space-y-1">
+          <p className="font-bold text-white/80">Horarios</p>
+          <p>Lunes - Jueves: 13:00 - 22:00</p>
+          <p>Viernes: 13:00 - 23:00</p>
+          <p>Sábado - Domingo: 13:00 - 22:00</p>
+        </div>
       </footer>
     </main>
   );
