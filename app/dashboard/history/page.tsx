@@ -3,9 +3,22 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import Link from "next/link";
 
+interface PointsLog {
+  id: number;
+  points: number;
+  source: string;
+  created_at: string;
+}
+
+interface Coupon {
+  id: number;
+  reward: string;
+  status: string;
+}
+
 export default function History() {
-  const [points, setPoints] = useState<any[]>([]);
-  const [coupons, setCoupons] = useState<any[]>([]);
+  const [points, setPoints] = useState<PointsLog[]>([]);
+  const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

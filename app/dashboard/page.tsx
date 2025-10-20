@@ -6,9 +6,10 @@ import QRCode from "react-qr-code";
 import PointsProgress from "@/components/PointsProgress";
 import Link from "next/link";
 import Image from "next/image";
+import type { User } from "@supabase/supabase-js";
 
 export default function Dashboard() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [qr, setQr] = useState("");
   const [coupon, setCoupon] = useState("");
   const [points, setPoints] = useState(0);

@@ -70,7 +70,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true, userId, newPoints });
 
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+  } catch (e: unknown) {
+    const message = e instanceof Error ? e.message : "An unknown error occurred";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

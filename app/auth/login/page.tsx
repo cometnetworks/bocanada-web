@@ -11,7 +11,7 @@ export default function LoginPage() {
   const [message, setMessage] = useState("");
   const router = useRouter();
 
-  const handleLogin = async (e: any) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage("Iniciando sesión...");
     const { error } = await supabase.auth.signInWithPassword({ email, password });

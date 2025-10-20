@@ -7,7 +7,7 @@ export default function StaffScan() {
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const submit = async (e: any) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setMsg("Validando...");
