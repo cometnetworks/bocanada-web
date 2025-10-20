@@ -13,11 +13,16 @@ export default function RegisterPage() {
     e.preventDefault();
     setMessage("Procesando...");
 
+    // Determina el dominio en runtime (prod o local)
+    const siteUrl =
+      process.env.NEXT_PUBLIC_SITE_URL
+      ?? (typeof window !== "undefined" ? window.location.origin : "https://bocanada-web.vercel.app");
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard`,
+        emailRedirectTo: `${siteUrl}/dashboard`,
       },
     });
 
