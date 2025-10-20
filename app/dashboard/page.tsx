@@ -2,12 +2,31 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function DashboardPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [userEmail, setUserEmail] = useState<string | null>(null);
-  const router = useRouter();
+
+  // 🚀 NUEVO BLOQUE: intercambia el token del email por sesión
+  useEffect(() => {
+    const exchangeToken = async () => {
+      const code = searchParams.get("code");
+      const token = searchParams.get("token"); // compatibilidad
+      if (code || token) {
+        const value = code || token;
+        try {
+          const { data, error } = await supabase.auth.exchangeCodeForSession(value);
+          console.log("Sesión intercambiada:", data, error);
+        } catch (err) {
+          console.error("Error al intercambiar token:", err);
+        }
+      }
+    };
+    exchangeToken();
+  }, [searchParams]);
 
   useEffect(() => {
     let mounted = true;
