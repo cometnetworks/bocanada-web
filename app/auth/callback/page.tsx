@@ -1,38 +1,45 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 
 export default function AuthCallbackPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const confirmUser = async () => {
+    const handleAuthCallback = async () => {
       try {
-        // Intentamos recuperar el usuario autenticado
-        const { data, error } = await supabase.auth.getUser();
+        // 🧩 Si viene con token en la URL (desde el correo)
+        const token = searchParams.get("token");
+        const type = searchParams.get("type");
 
-        if (error || !data.user) {
-          console.error("Error obteniendo usuario:", error);
-          router.replace("/auth/login");
-          return;
+        if (token && type === "signup") {
+          // Intercambia el token por sesión activa
+          const { data, error } = await supabase.auth.exchangeCodeForSession(token);
+          if (error) console.error("Error creando sesión desde token:", error);
         }
 
-        console.log("Usuario autenticado:", data.user.email);
-
-        // Pequeña pausa estética antes del redireccionamiento
-        setTimeout(() => {
-          router.replace("/dashboard");
-        }, 2000);
-      } catch (err) {
-        console.error("Error general:", err);
+        // ✅ Verifica si ya existe una sesión activa
+        const { data: sessionData } = await supabase.auth.getSession();
+        if (sessionData.session) {
+          // Espera un poco para mostrar pantalla de bienvenida
+          setTimeout(() => router.replace("/dashboard"), 2000);
+        } else {
+          router.replace("/auth/login");
+        }
+      } catch (error) {
+        console.error("Error en callback:", error);
         router.replace("/auth/login");
+      } finally {
+        setLoading(false);
       }
     };
 
-    confirmUser();
-  }, [router]);
+    handleAuthCallback();
+  }, [router, searchParams]);
 
   return (
     <div
@@ -43,27 +50,24 @@ export default function AuthCallbackPage() {
         backgroundPosition: "center",
       }}
     >
-      {/* Filtro de color cálido */}
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
 
-      {/* Contenido */}
       <div className="relative z-10 text-center px-6">
         <h1 className="text-3xl font-bold mb-4 animate-pulse drop-shadow-lg">
           🔥 ¡Bienvenido a <span className="text-red-500">Bocanada Club</span>!
         </h1>
 
         <p className="text-lg text-gray-200 mb-6">
-          Verificando tu cuenta y preparando tu experiencia a la brasa...
+          Activando tu cuenta y preparando tu experiencia...
         </p>
 
         <div className="w-16 h-16 border-4 border-t-red-500 border-gray-400 rounded-full animate-spin mx-auto mb-6"></div>
 
         <p className="text-sm text-gray-400">
-          Serás redirigido automáticamente en unos segundos.
+          Serás redirigido automáticamente a tu dashboard.
         </p>
       </div>
 
-      {/* Marca al pie */}
       <footer className="absolute bottom-4 text-xs text-gray-500">
         Bocanada Cocina de Brasa © {new Date().getFullYear()}
       </footer>
