@@ -1,111 +1,65 @@
 "use client";
 
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
-import Image from "next/image";
 
-function DashboardInner() {
+export default function DashboardPage() {
+  const router = useRouter();
   const supabase = createClient();
-  const [profile, setProfile] = useState<any>(null);
-  const [coupon, setCoupon] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const checkSession = async () => {
       const {
-        data: { user },
-      } = await supabase.auth.getUser();
+        data: { session },
+      } = await supabase.auth.getSession();
 
-      if (user) {
-        // Obtener perfil del usuario
-        const { data: profileData } = await supabase
-          .from("users")
-          .select("id, qr_code")
-          .eq("id", user.id)
-          .single();
-
-        // Obtener cupón activo
-        const { data: couponData } = await supabase
-          .from("coupons")
-          .select("type, reward")
-          .eq("user_id", user.id)
-          .eq("active", true)
-          .maybeSingle();
-
-        setProfile(profileData);
-        setCoupon(couponData);
+      if (!session) {
+        // ❌ Si no hay sesión, redirige al login
+        router.replace("/auth/login");
+      } else {
+        // ✅ Si hay sesión, guarda el usuario y deja de cargar
+        setUser(session.user);
         setLoading(false);
-
-        // Redirigir automáticamente al home después de unos segundos
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 7000);
       }
     };
 
-    fetchUserData();
-  }, [supabase]);
+    checkSession();
+  }, [router, supabase]);
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen text-white text-lg">
-        Cargando tu información...
+      <div className="flex h-screen items-center justify-center bg-black text-white">
+        <p>Cargando tu información...</p>
       </div>
     );
   }
 
   return (
-    <div
-      className="min-h-screen flex flex-col items-center justify-center text-white bg-cover bg-center"
-      style={{
-        backgroundImage:
-          "url('https://bocanada-web.vercel.app/background-brasas.jpg')", // actualiza con la imagen real en /public/
-      }}
-    >
-      <div className="bg-black/60 backdrop-blur-md p-8 rounded-2xl shadow-xl text-center w-[90%] max-w-md">
-        <Image
-          src="/bocanada-logo.png" // agrega el logo en /public/
-          alt="Bocanada Logo"
-          width={180}
-          height={80}
-          className="mx-auto mb-4"
-        />
-        <h1 className="text-2xl font-semibold mb-2">
-          ¡Bienvenido, {profile?.id?.slice(0, 6)}!
-        </h1>
-        <p className="text-gray-300 mb-4">
-          Tu código QR personal para validar tu visita:
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-8">
+      <h1 className="text-3xl font-bold mb-4">Bienvenido, {user?.email}</h1>
+      <p className="text-lg text-gray-300 mb-6">
+        🎉 Tienes 0 puntos acumulados
+      </p>
+
+      <div className="bg-gray-800 rounded-xl p-6 w-full max-w-md text-center">
+        <p className="text-sm text-gray-400 mb-3">
+          Escanea este código en caja para ganar tus primeras recompensas:
         </p>
-        <div className="bg-white p-2 rounded-lg inline-block mb-4">
-          <img
-            src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${profile?.qr_code}`}
-            alt="QR Code"
-          />
-        </div>
-        <p className="text-lg font-semibold text-yellow-400 mb-2">
-          {coupon?.reward || "Cupón no disponible"}
-        </p>
-        <p className="text-sm text-gray-300 mb-6">
-          Código: {profile?.qr_code}
-        </p>
-        <a
-          href="/dashboard/history"
-          className="text-sm text-orange-400 underline hover:text-orange-300 transition"
-        >
-          Ver historial →
-        </a>
-        <p className="text-xs text-gray-400 mt-4">
-          Serás redirigido al inicio en unos segundos...
+        <img src="/qr-sample.png" alt="QR Bocanada Club" className="mx-auto mb-4 w-40 h-40" />
+        <p className="text-sm text-gray-400">
+          O presenta tu código: <strong>#B0CANADA123</strong>
         </p>
       </div>
-    </div>
-  );
-}
 
-export default function DashboardPage() {
-  return (
-    <Suspense fallback={<div className="text-white text-center mt-20">Cargando dashboard...</div>}>
-      <DashboardInner />
-    </Suspense>
+      <button
+        onClick={() => supabase.auth.signOut().then(() => router.replace("/"))}
+        className="mt-8 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
+      >
+        Cerrar sesión
+      </button>
+    </div>
   );
 }
