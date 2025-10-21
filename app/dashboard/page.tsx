@@ -38,25 +38,35 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-8">
-      <h1 className="text-3xl font-bold mb-4">Bienvenido, {user?.email}</h1>
-      <p className="text-lg text-gray-300 mb-6">
-        🎉 Tienes 0 puntos acumulados
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white p-8">
+      <h1 className="text-3xl font-extrabold mb-2">🔥 Bocanada Club</h1>
+      <p className="text-gray-300 mb-8 text-center">
+        Bienvenido, <span className="text-red-500 font-semibold">{user?.email}</span>
+        <br /> Ya eres parte del programa de recompensas Bocanada.
       </p>
 
-      <div className="bg-gray-800 rounded-xl p-6 w-full max-w-md text-center">
-        <p className="text-sm text-gray-400 mb-3">
-          Escanea este código en caja para ganar tus primeras recompensas:
+      {/* Tarjeta de puntos */}
+      <div className="bg-zinc-900 border border-red-600 rounded-2xl p-6 w-full max-w-md text-center shadow-lg shadow-red-700/20">
+        <h2 className="text-xl font-semibold mb-2">Tu saldo de puntos</h2>
+        <p className="text-5xl font-bold text-red-500 mb-4">0</p>
+        <p className="text-sm text-gray-400 mb-6">
+          Escanea este código al pagar y comienza a ganar recompensas 🍽️
         </p>
-        <img src="/qr-sample.png" alt="QR Bocanada Club" className="mx-auto mb-4 w-40 h-40" />
-        <p className="text-sm text-gray-400">
-          O presenta tu código: <strong>#B0CANADA123</strong>
+
+        <img
+          src="/qr-sample.png"
+          alt="QR Bocanada Club"
+          className="mx-auto mb-4 w-40 h-40 border border-red-500 rounded-lg shadow-md"
+        />
+
+        <p className="text-sm text-gray-400 mb-6">
+          Código de cliente: <span className="text-white font-semibold">#B0CANADA123</span>
         </p>
       </div>
 
       <button
         onClick={() => supabase.auth.signOut().then(() => router.replace("/"))}
-        className="mt-8 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
+        className="mt-10 bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg shadow-md"
       >
         Cerrar sesión
       </button>
