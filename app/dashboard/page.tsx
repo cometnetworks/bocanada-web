@@ -65,8 +65,15 @@ export default function DashboardPage() {
       </div>
 
       <button
+        onClick={() => router.push("/")}
+        className="mt-6 bg-zinc-800 hover:bg-zinc-700 text-white px-6 py-2 rounded-lg border border-gray-600 shadow-sm"
+      >
+        Ir al inicio 🍽️
+      </button>
+
+      <button
         onClick={() => supabase.auth.signOut().then(() => router.replace("/"))}
-        className="mt-10 bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg shadow-md"
+        className="mt-4 bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg shadow-md"
       >
         Cerrar sesión
       </button>
