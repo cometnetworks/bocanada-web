@@ -1,61 +1,85 @@
-"use client";
-
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-
 export default function Home() {
-  const router = useRouter();
-
   return (
-    <main className="relative min-h-screen flex flex-col items-center justify-center text-white overflow-hidden">
-      {/* 🔥 Video de fondo */}
+    <div className="relative min-h-screen flex flex-col items-center justify-center text-white overflow-hidden">
+      {/* 🎥 Video de fondo principal */}
       <video
         autoPlay
-        muted
         loop
+        muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover brightness-[0.4]"
+        className="absolute inset-0 w-full h-full object-cover"
+        poster="/brasa-bg.jpg" // Imagen de respaldo si el video no carga
       >
         <source src="/brasas.mp4" type="video/mp4" />
+        Tu navegador no soporta reproducción de video.
       </video>
 
-      {/* 🔳 Capa de calor/sombra */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/90" />
+      {/* 🔲 Capa de contraste */}
+      <div className="absolute inset-0 bg-black/60" />
 
-      {/* 🌟 Contenido principal */}
-      <div className="relative z-10 text-center px-6 max-w-lg animate-fadeIn">
-        <Image
-          src="/bocanada-logo.png"
-          alt="Bocanada Cocina de Brasa"
-          width={320}
-          height={110}
-          priority
-          className="mx-auto drop-shadow-[0_2px_10px_rgba(255,255,255,0.2)] mb-6"
+      {/* 🔥 Contenido principal */}
+      <div className="relative z-10 flex flex-col items-center text-center p-8">
+        <img
+          src="/logo-bocanada.png"
+          alt="Bocanada Cocina de Brassa"
+          className="w-72 mb-6 drop-shadow-lg"
         />
 
-        <h1 className="text-4xl md:text-5xl font-bold mb-3 tracking-wide font-serif">
+        <h1 className="text-4xl md:text-5xl font-bold mb-2">
           Bocanada Club
         </h1>
-
-        <p className="text-lg md:text-xl text-gray-200 mb-10 leading-relaxed">
-          Acumula puntos, desbloquea recompensas y disfruta de la mejor experiencia a la brasa 🔥
+        <p className="text-lg mb-6 max-w-md">
+          Acumula puntos, desbloquea recompensas y disfruta de la mejor
+          experiencia a la brasa 🔥
         </p>
 
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <button
-            onClick={() => router.push("/auth/login")}
-            className="px-8 py-3 bg-red-600 hover:bg-red-700 transition-all rounded-xl font-semibold shadow-md hover:shadow-lg"
+        {/* Botones de acción */}
+        <div className="flex flex-col md:flex-row gap-4">
+          <a
+            href="/auth/login"
+            className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg transition"
           >
             Iniciar sesión
-          </button>
-          <button
-            onClick={() => router.push("/auth/register")}
-            className="px-8 py-3 bg-transparent border border-white/70 hover:bg-white/10 transition-all rounded-xl font-semibold"
+          </a>
+          <a
+            href="/auth/register"
+            className="border border-white hover:bg-white hover:text-black font-semibold px-6 py-3 rounded-lg transition"
           >
             Registrarse
-          </button>
+          </a>
+        </div>
+
+        {/* 🔗 Enlaces secundarios */}
+        <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-gray-300">
+          <a
+            href="https://www.ubereats.com/mx/store/bocanada-cocina-de-brassa/FSlEl8NzWxuw0LJ49jfXYA"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition"
+          >
+            📦 Delivery (Uber Eats)
+          </a>
+          <a href="#menu" className="hover:text-white transition">
+            🍽️ Menú
+          </a>
+          <a href="#reservar" className="hover:text-white transition">
+            📅 Reservar mesa
+          </a>
+          <a
+            href="https://www.instagram.com/bocanadamerida/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition"
+          >
+            📸 Instagram
+          </a>
         </div>
       </div>
-    </main>
+
+      {/* 🧾 Footer */}
+      <footer className="absolute bottom-4 text-sm text-gray-400">
+        Bocanada Cocina de Brassa © {new Date().getFullYear()}
+      </footer>
+    </div>
   );
 }
