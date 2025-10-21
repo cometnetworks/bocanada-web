@@ -13,10 +13,13 @@ export default function RegisterPage() {
     e.preventDefault()
 
     try {
+      const redirectUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://bocanada-web.vercel.app'
+      console.log('Redirect URL usada en producción:', redirectUrl)
+
       const { data, error } = await supabase.auth.signUp(
         { email, password },
         {
-          emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://bocanada-web.vercel.app'}/dashboard`,
+          emailRedirectTo: `${redirectUrl}/dashboard`,
         }
       )
 
