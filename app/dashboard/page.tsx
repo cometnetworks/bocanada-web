@@ -1,65 +1,36 @@
 "use client";
 
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabaseClient";
-import { useRouter, useSearchParams } from "next/navigation";
+import { createClient } from "@/utils/supabase/client";
 
-export default function DashboardPage() {
-  const router = useRouter();
+function DashboardInner() {
+  const supabase = createClient();
   const searchParams = useSearchParams();
-  const [loading, setLoading] = useState(true);
-  const [userEmail, setUserEmail] = useState<string | null>(null);
-
-  // 🚀 NUEVO BLOQUE: intercambia el token del email por sesión
-  useEffect(() => {
-    const exchangeToken = async () => {
-      const code = searchParams.get("code");
-      const token = searchParams.get("token"); // compatibilidad
-      const value = code || token;
-      if (value) {
-        try {
-          const { data, error } = await supabase.auth.exchangeCodeForSession(value);
-          console.log("Sesión intercambiada:", data, error);
-        } catch (err) {
-          console.error("Error al intercambiar token:", err);
-        }
-      } else {
-        console.warn("⚠️ No se encontró código ni token válido para intercambiar sesión.");
-      }
-    };
-    exchangeToken();
-  }, [searchParams]);
+  const [points, setPoints] = useState(0);
 
   useEffect(() => {
-    let mounted = true;
-
-    const run = async () => {
-      try {
-        const { data, error } = await supabase.auth.getUser();
-        if (error || !data.user) {
-          router.replace("/auth/login");
-          return;
-        }
-        if (!mounted) return;
-        setUserEmail(data.user.email ?? null);
-      } catch (e) {
-        console.error(e);
-        router.replace("/auth/login");
-      } finally {
-        if (mounted) setLoading(false);
-      }
+    // Aquí tu lógica para obtener puntos y cupones
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("points_log").select("*");
+      if (!error && data) setPoints(data.length * 20);
     };
-
-    run();
-    return () => { mounted = false; };
-  }, [router]);
-
-  if (loading) return <p className="p-8 text-white">Cargando…</p>;
+    fetchData();
+  }, [supabase]);
 
   return (
-    <div className="text-white text-center p-8">
-      <h1 className="text-2xl font-bold mb-4">¡Bienvenido, {userEmail}!</h1>
-      {/* …resto del dashboard… */}
+    <div className="flex flex-col items-center justify-center min-h-screen text-white">
+      <h1 className="text-3xl font-bold mb-4">¡Bienvenido a tu Dashboard!</h1>
+      <p>Tienes {points} puntos.</p>
     </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<div className="text-white text-center mt-20">Cargando dashboard...</div>}>
+      <DashboardInner />
+    </Suspense>
   );
 }
