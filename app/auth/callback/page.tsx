@@ -20,8 +20,12 @@ export default function AuthCallbackPage() {
         if ((code || token) && (type === "signup" || type === "magiclink")) {
           const value = code || token;
           console.log("Intercambiando código por sesión...", { type, value });
-          const { data, error } = await supabase.auth.exchangeCodeForSession(value);
-          if (error) console.error("Error al crear sesión:", error);
+          if (value) {
+            const { data, error } = await supabase.auth.exchangeCodeForSession(value);
+            if (error) console.error("Error al crear sesión:", error);
+          } else {
+            console.error("No se recibió un código o token válido");
+          }
         }
 
         // ✅ Verificar si ya hay sesión activa
