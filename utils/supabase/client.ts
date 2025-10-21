@@ -1,22 +1,16 @@
-import { createBrowserClient } from '@supabase/ssr'
+// utils/supabase/client.ts
+import { createBrowserClient } from "@supabase/ssr";
 
-const siteUrl =
-  typeof window !== 'undefined'
-    ? window.location.origin // Usa el dominio actual del navegador
-    : process.env.NEXT_PUBLIC_SITE_URL || 'https://bocanada-web.vercel.app'
-
-export const createClient = () =>
-  createBrowserClient(
+export function createClient() {
+  return createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       auth: {
-        flowType: 'pkce',
-        autoRefreshToken: true,
-        persistSession: true,
-        detectSessionInUrl: true,
-        // 🔥 Aquí forzamos el dominio correcto siempre:
-        emailRedirectTo: `${siteUrl}/dashboard`,
+        persistSession: true, // ✅ Mantiene sesión tras recargar o navegar
+        autoRefreshToken: true, // 🔁 Renueva el token automáticamente
+        detectSessionInUrl: true, // ⚙️ Necesario para el flujo de magic link
       },
     }
-  )
+  );
+}
