@@ -15,14 +15,16 @@ export default function DashboardPage() {
     const exchangeToken = async () => {
       const code = searchParams.get("code");
       const token = searchParams.get("token"); // compatibilidad
-      if (code || token) {
-        const value = code || token;
+      const value = code || token;
+      if (value) {
         try {
           const { data, error } = await supabase.auth.exchangeCodeForSession(value);
           console.log("Sesión intercambiada:", data, error);
         } catch (err) {
           console.error("Error al intercambiar token:", err);
         }
+      } else {
+        console.warn("⚠️ No se encontró código ni token válido para intercambiar sesión.");
       }
     };
     exchangeToken();
