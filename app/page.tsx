@@ -20,9 +20,9 @@ export default function Home() {
       {/* 🔥 Contenido principal */}
       <div className="relative z-10 flex flex-col items-center text-center p-8">
         <img
-          src="/logo-bocanada.png"
+          src="/bocanada-logo.png"
           alt="Bocanada Cocina de Brassa"
-          className="w-72 mb-6 drop-shadow-lg"
+          className="w-auto h-12 mx-auto mb-4"
         />
 
         <h1 className="text-4xl md:text-5xl font-bold mb-2">
