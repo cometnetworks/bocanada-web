@@ -65,7 +65,7 @@ export default function DashboardPage() {
       </div>
 
       <button
-        onClick={() => router.push("/")}
+        onClick={() => window.location.href = "/"}
         className="mt-6 bg-zinc-800 hover:bg-zinc-700 text-white px-6 py-2 rounded-lg border border-gray-600 shadow-sm"
       >
         Ir al inicio 🍽️
