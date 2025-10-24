@@ -2,31 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-[#0B0B0B] text-white;
-  }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease-out forwards;
-}
-
+/* Estilos globales Bocanada */
+html,
 body {
-  overflow-x: hidden;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
 }
 
-/* ✨ Efecto calor sutil */
-@keyframes shimmer {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.1); }
+a {
+  text-decoration: none;
 }
 
-video {
-  animation: shimmer 8s ease-in-out infinite;
+img {
+  display: block;
+  max-width: 100%;
 }
