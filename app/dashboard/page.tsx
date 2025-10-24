@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
+import Link from "next/link";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -64,12 +65,12 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      <button
-        onClick={() => window.location.href = "/home"}
+      <Link
+        href="/"
         className="mt-6 bg-zinc-800 hover:bg-zinc-700 text-white px-6 py-2 rounded-lg border border-gray-600 shadow-sm"
       >
         Ir al inicio 🍽️
-      </button>
+      </Link>
 
       <button
         onClick={() => supabase.auth.signOut().then(() => router.replace("/"))}
