@@ -5,6 +5,6 @@ export default function ReservarPage() {
   return (
     <Suspense fallback={<div>Cargando...</div>}>
       <Reservation />
-    </sSuspense>
+    </Suspense>
   );
 }
