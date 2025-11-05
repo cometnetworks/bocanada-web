@@ -350,3 +350,16 @@ export const getFeaturedDishes = () => {
 export const getAllDishes = () => {
   return DISHES;
 };
+
+function slugify(name: string) {
+  return name
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+}
+
+export const getDishBySlug = (slug: string) => {
+  return DISHES.find((dish) => slugify(dish.name) === slug);
+};
