@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import MiniReserva from "@/components/MiniReserva";
 
 export default function HomePage() {
   return (
@@ -91,28 +92,120 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 🎄 Promoción de la semana */}
-      <section className="max-w-7xl mx-auto py-12 px-6 flex flex-col md:flex-row gap-6 items-center bg-neutral-900/60 rounded-xl">
-        <div className="flex-1">
-          <h2 className="text-2xl font-semibold">Cena de Fin de Año 🎄🍷</h2>
-          <p className="text-gray-400 mt-2">
-            Reserva tu mesa y disfruta una noche especial con vino de cortesía.
+      {/* Sección de Promoción */}
+      <MiniReserva />
+
+      {/* =======================
+      📅 EVENTOS Y PROMOCIONES
+      ======================= */}
+      <section className="py-16 bg-[#f8f6f5] dark:bg-[#1A1A1A]">
+        <div className="max-w-6xl mx-auto text-center px-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 text-[#a22e2e]">
+            Eventos y Promociones
+          </h2>
+          <p className="text-slate-600 dark:text-slate-300 mb-10 text-lg">
+            Vive experiencias únicas, celebra con nosotros y descubre las nuevas 
+            promociones de <strong>Bocanada Cocina de Brassa</strong>.
           </p>
-          <a
-            href="tel:5593163674"
-            className="inline-block mt-4 px-5 py-2 bg-amber-600 rounded-md hover:bg-amber-700 transition"
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {/* 🎉 Aniversario Bocanada */}
+            <div className="group bg-white dark:bg-[#2A2A2A] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+              <div className="relative w-full h-56">
+                <Image
+                  src="/eventos/bocanada-aniversario.jpg"
+                  alt="Aniversario Bocanada"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute top-3 left-3 bg-[#DAA520] text-black font-bold px-3 py-1 rounded-full text-xs uppercase">
+                  Evento Especial
+                </div>
+              </div>
+              <div className="p-6 text-left">
+                <h3 className="text-lg font-bold mb-2 text-[#a22e2e]">
+                  🎉 Aniversario Bocanada 2025
+                </h3>
+                <p className="text-sm mb-4 text-slate-700 dark:text-slate-300">
+                  Celebra con nosotros el lunes 17 de noviembre con música en vivo,
+                  menú especial y promociones exclusivas.
+                </p>
+                <Link
+                  href="/reservar"
+                  className="text-[#f24a0d] font-bold hover:text-[#d93d0b] transition-colors"
+                >
+                  Reservar →
+                </Link>
+              </div>
+            </div>
+
+            {/* 🎄 Cena de Fin de Año */}
+            <div className="group bg-white dark:bg-[#2A2A2A] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+              <div className="relative w-full h-56">
+                <Image
+                  src="/eventos/promo-navidad.jpg"
+                  alt="Cena de Fin de Año"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute top-3 left-3 bg-[#DAA520] text-black font-bold px-3 py-1 rounded-full text-xs uppercase">
+                  Cena Especial
+                </div>
+              </div>
+              <div className="p-6 text-left">
+                <h3 className="text-lg font-bold mb-2 text-[#a22e2e]">
+                  🎄 Cena de Fin de Año
+                </h3>
+                <p className="text-sm mb-4 text-slate-700 dark:text-slate-300">
+                  Despide el año con una cena exclusiva y maridaje especial. ¡Asegura
+                  tu mesa antes del 31 de diciembre!...
+                </p>
+                <Link
+                  href="/reservar"
+                  className="text-[#f24a0d] font-bold hover:text-[#d93d0b] transition-colors"
+                >
+                  Reservar →
+                </Link>
+              </div>
+            </div>
+
+            {/* 🍸 Happy Hour */}
+            <div className="group bg-white dark:bg-[#2A2A2A] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+              <div className="relative w-full h-56">
+                <Image
+                  src="/eventos/happy-hour.jpg"
+                  alt="Happy Hour Bocanada"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute top-3 left-3 bg-[#DAA520] text-black font-bold px-3 py-1 rounded-full text-xs uppercase">
+                  Promoción Permanente
+                </div>
+              </div>
+              <div className="p-6 text-left">
+                <h3 className="text-lg font-bold mb-2 text-[#a22e2e]">
+                  🍸 Happy Hour
+                </h3>
+                <p className="text-sm mb-4 text-slate-700 dark:text-slate-300">
+                  Cocteles 2x1 y botanas especiales de lunes a jueves, de 5:00 p.m. a
+                  7:00 p.m.
+                </p>
+                <Link
+                  href="/menu"
+                  className="text-[#f24a0d] font-bold hover:text-[#d93d0b] transition-colors"
+                >
+                  Ver Menú →
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <Link
+            href="/eventos"
+            className="inline-block bg-[#f24a0d] hover:bg-[#d93d0b] text-white px-6 py-3 rounded-xl font-semibold transition-all"
           >
-            Reservar
-          </a>
-        </div>
-        <div className="flex-1">
-          <Image
-            src="/promo-navidad.jpg"
-            alt="Promoción de la semana"
-            width={600}
-            height={300}
-            className="rounded-lg object-cover w-full"
-          />
+            Ver todos los eventos
+          </Link>
         </div>
       </section>
 

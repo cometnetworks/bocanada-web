@@ -1,0 +1,227 @@
+# 🧭 Reglas Técnicas — Bocanada Cocina de Brassa (v1.0)
+**Contexto:** Archivo de gobernanza para IA (Cursor, Claude Code, Windsurf, Gemini Code Assist).  
+**Propósito:** Asegurar calidad, coherencia visual y estabilidad del código generado en el proyecto.
+
+---
+
+## ⚙️ 1. Stack autorizado
+
+| Capa | Tecnología | Regla |
+|------|-------------|-------|
+| Frontend | Next.js 15 (App Router, TypeScript) | Obligatorio |
+| UI | Tailwind CSS + PostCSS | Obligatorio |
+| Auth | Supabase (Auth v2) | Obligatorio |
+| Base de datos | Supabase PostgreSQL | Solo para v1.1+ |
+| Deploy | Vercel | Único entorno permitido |
+| Imágenes | next/image | No usar etiquetas `<img>` |
+| Iconografía | lucide-react | Estilo uniforme |
+
+---
+
+## 📂 2. Estructura de archivos y carpetas
+
+1. **`app/layout.tsx`** debe ser la única fuente de `<Navbar />` y `<Footer />`.
+2. Ninguna otra página puede duplicar header/footer.
+3. Los componentes nuevos deben ubicarse en `/components` con nombre PascalCase.
+4. Las utilidades (helpers, tipos, constantes) se alojan en `/lib`.
+5. Todo recurso estático va en `/public` y debe seguir el naming definido en `architecture.md`.
+
+---
+
+## 🧱 3. Reglas de Componentes React
+
+- Todos los componentes deben estar escritos en **TypeScript (.tsx)**.
+- Evitar `any`; preferir tipos explícitos o genéricos parametrizados.
+- No usar `default export` salvo en páginas (`page.tsx`).
+- Cada componente debe exportar `Props` si recibe propiedades.
+
+### Ejemplo estándar:
+```tsx
+type ButtonProps = {
+  label: string;
+  onClick?: () => void;
+};
+
+export function Button({ label, onClick }: ButtonProps) {
+  return (
+    <button
+      onClick={onClick}
+      className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition"
+    >
+      {label}
+    </button>
+  );
+}
+```
+
+🎨 4. Reglas de Estilo (TailwindCSS)
+
+
+No usar colores arbitrarios; seguir esta paleta base:
+
+
+VariableColorprimary#a22e2e (rojo vino)secondary#d4a373 (bronce cálido)background#0e0e0etext#ffffff
+
+
+Usar clases Tailwind puras, sin CSS externo salvo casos especiales.
+
+
+Prefijo hover: y transition deben aplicarse en todos los botones interactivos.
+
+
+Evitar clases personalizadas (className="custom-btn"), preferir utilidades de Tailwind.
+
+
+El layout global debe usar bg-background text-text.
+
+
+
+🔐 5. Reglas de Autenticación y Seguridad
+
+
+Prohibido exponer claves Supabase en el código.
+
+
+Las variables de entorno deben llamarse:
+
+
+NEXT_PUBLIC_SUPABASE_URL
+
+
+NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+
+NEXT_PUBLIC_SITE_URL
+
+
+
+
+redirect_to dinámico: usar ${process.env.NEXT_PUBLIC_SITE_URL}/dashboard
+
+
+Evitar llamadas directas a APIs sin control de error.
+
+
+Cualquier endpoint o fetch debe estar envuelto en try/catch.
+
+
+
+🧩 6. Buenas prácticas Next.js (App Router)
+✅ Usar:
+
+
+use client solo donde sea necesario.
+
+
+next/navigation para redirección.
+
+
+next/link para navegación interna.
+
+
+🚫 Evitar:
+
+
+window.location.href (usa router.push()).
+
+
+Componentes duplicados (Navbar/Footer locales).
+
+
+Acceso directo a document o window en componentes server-side.
+
+
+
+
+ 7. Convenciones de Nombres
+TipoFormatoEjemploComponentes ReactPascalCaseMenuGrid.tsx, Footer.tsxArchivos de utilidadkebab-caseslug.ts, menu-data.tsVariables JScamelCasemenuItems, handleClickArchivos de imagenkebab-casebocanada-logo.png, brasas.mp4TiposPascalCaseDish, UserProfile
+
+📜 8. Reglas de Lógica de Negocio
+
+
+El Home (/) siempre debe cargar el video brasas.mp4 y fallback brasa-bg.jpg.
+
+
+“Ver Menú” redirige a /menu.
+
+
+“Reservar” abre tel:5593163674.
+
+
+“Únete al Club” redirige a /auth/register.
+
+
+Avatar → abre /dashboard.
+
+
+Footer incluye: dirección, horario, Instagram, Facebook, Maps, UberEats.
+
+
+
+🧩 9. Testing y validación
+
+
+Usar npm run lint antes de cada commit.
+
+
+Desplegar en Vercel solo si el build local pasa.
+
+
+Revisar visualmente las rutas: /, /menu, /reservar, /dashboard.
+
+
+Probar video y assets locales para evitar errores 404.
+
+
+Verificar que .env.local no esté en Git.
+
+
+
+🧱 10. Versionado y commits
+Reglas de commits:
+feat: nueva funcionalidad
+fix: corrección de bug
+refactor: mejora de código sin alterar comportamiento
+style: cambios visuales (CSS, layout)
+docs: actualización de documentación
+
+Ejemplo:
+feat: agrega galería “Momentos de la Parrilla” con imágenes ambiente1–7
+
+
+🧠 11. Restricciones para IAs y agentes automáticos
+
+
+No modificar nombres de archivos en /public sin aprobación.
+
+
+No alterar layout.tsx sin confirmar jerarquía global.
+
+
+No añadir dependencias nuevas salvo que estén documentadas en architecture.md.
+
+
+No generar código de backend no planeado (FastAPI, Express, etc.).
+
+
+Mantener compatibilidad con despliegue en Vercel.
+
+
+
+🔄 12. Revisión de calidad (Checklist antes de commit)
+CheckCriterio✅El build local (npm run build) pasa sin errores✅No hay duplicados de Navbar/Footer✅Todas las imágenes cargan correctamente✅Los enlaces del Footer funcionan✅Autenticación Supabase funcional✅Video brasas.mp4 y fallback brasa-bg.jpg cargan correctamente✅Responsive test superado en viewport móvil y desktop✅Linting limpio (npm run lint)
+
+🔚 13. Filosofía del Proyecto
+
+“Código limpio, interfaz viva, experiencia memorable.”
+— Bocanada Cocina de Brassa Dev Team 🥩🔥
+
+
+
+---
+
+📍 **Instrucción final:**  
+Guarda este archivo en la raíz del repositorio con el nombre **`.cursorrules`** (sin extensión).  
+Cursor, Windsurf o Claude Code lo leerán automáticamente para **seguir las reglas de desarrollo, naming y calidad**.
+
+¿Deseas que te genere ahora el archivo **`rules.md`**, que es una versión paralela más explicativa (ideal para subir también al repo o compartir con otros devs humanos)?
