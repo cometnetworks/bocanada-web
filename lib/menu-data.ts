@@ -1,365 +1,645 @@
-// ===============================================
-// 📦 lib/menu-data.ts
-// Bocanada Cocina de Brassa - Menú completo (versión estable)
-// ===============================================
-
 export type Dish = {
+  id: string;
   name: string;
-  desc: string;
-  price: string;
+  desc?: string;
+  price: number;
+  image: string;
   category: string;
-  img: string;
 };
 
-// =======================
-// 🥩 CATEGORÍAS PRINCIPALES
-// =======================
-export const CATEGORIES = [
-  "Favoritos del Chef",
-  "Entradas",
-  "Empanadas",
-  "Ensaladas",
-  "Pastas",
-  "Quesos Fundidos",
-  "Hamburguesas",
-  "Tacos y Sándwiches",
-  "Bebidas y Cocteles"
-] as const;
-
-// =======================
-// 🍽️ PLATILLOS
-// =======================
-export const DISHES: Dish[] = [
-  // 🔸 Favoritos del Chef
-  {
-    name: "Canelones",
-    desc: "De carne o espinaca, bañados en salsa pomodoro, gratinados con queso Gouda y parmesano rallado.",
-    price: "$185",
-    category: "Favoritos del Chef",
-    img: "/menu/canelones.jpg",
-  },
-  {
-    name: "Lasagna Uruguaya",
-    desc: "Lasagna casera con carne o espinaca, salsa pomodoro y gratinada con queso Gouda y parmesano.",
-    price: "$199",
-    category: "Favoritos del Chef",
-    img: "/menu/lasagna-uruguaya.jpg",
-  },
-  {
-    name: "Milanesa Napolitana de Pollo",
-    desc: "Milanesa de pollo con salsa pomodoro, jamón de pavo y queso Gouda gratinado, acompañada de papas fritas.",
-    price: "$199",
-    category: "Favoritos del Chef",
-    img: "/menu/milanesa-napolitana-pollo.jpg",
-  },
-  {
-    name: "Milanesa Napolitana de Res",
-    desc: "Milanesa de res con salsa pomodoro, jamón de pavo y queso Gouda gratinado, acompañada de papas fritas.",
-    price: "$199",
-    category: "Favoritos del Chef",
-    img: "/menu/milanesa-napolitana-res.jpg",
-  },
-
-  // 🔸 Entradas
-  {
-    name: "Papa Parrilla",
-    desc: "Horneada en mantequilla con hierbas de olor, rellena de queso, tocino y crema.",
-    price: "$119",
-    category: "Entradas",
-    img: "/menu/papa-parrilla.jpg",
-  },
-  {
-    name: "Queso Provoleta",
-    desc: "200 gm de queso provolone a la plancha con jitomate y orégano.",
-    price: "$135",
-    category: "Entradas",
-    img: "/menu/queso-provoleta.jpg",
-  },
-  {
-    name: "Espárragos Envueltos",
-    desc: "Espárragos salteados, envueltos en tocino con reducción de vino tinto con café.",
-    price: "$99",
-    category: "Entradas",
-    img: "/menu/esparragos-envueltos.jpg",
-  },
-  {
-    name: "Aguachile de Camarón",
-    desc: "Aguachile verde con pepino, cebolla y aguacate al estilo Bocanada.",
-    price: "$239",
-    category: "Entradas",
-    img: "/menu/aguachile-camaron.jpg",
-  },
-  {
-    name: "Tostadas Gemelas de Atún",
-    desc: "Atún aleta azul, pepino, cebolla, mango y aguacate. Fresco y balanceado.",
-    price: "$199",
-    category: "Entradas",
-    img: "/menu/tostadas-atun.jpg",
-  },
-
-  // 🔸 Empanadas
-  {
-    name: "Empanada de Carne",
-    desc: "Carne molida con el toque especial de la casa.",
-    price: "$52",
-    category: "Empanadas",
-    img: "/menu/empanada-carne.jpg",
-  },
-  {
-    name: "Empanada de Elote",
-    desc: "Grano de elote guisado en mantequilla con mix de quesos.",
-    price: "$52",
-    category: "Empanadas",
-    img: "/menu/empanada-elote.jpg",
-  },
-  {
-    name: "Empanada de Espinaca",
-    desc: "Espinacas guisadas en mantequilla con queso doble crema.",
-    price: "$52",
-    category: "Empanadas",
-    img: "/menu/empanada-espinaca.jpg",
-  },
-  {
-    name: "Empanada de Chistorra",
-    desc: "Chistorra a la parrilla con mix de quesos.",
-    price: "$52",
-    category: "Empanadas",
-    img: "/menu/empanada-chistorra.jpg",
-  },
-  {
-    name: "Empanada Hawaiana",
-    desc: "Jamón, piña y queso al estilo uruguayo.",
-    price: "$52",
-    category: "Empanadas",
-    img: "/menu/empanada-hawaiana.jpg",
-  },
-  {
-    name: "Empanada de Jamón",
-    desc: "Jamón de pavo y queso gratinado.",
-    price: "$52",
-    category: "Empanadas",
-    img: "/menu/empanada-jamon.jpg",
-  },
-
-  // 🔸 Ensaladas
-  {
-    name: "Ensalada Tropical",
-    desc: "Mix de lechugas, arándano, nuez, frutos, queso de cabra y aderezo de la casa.",
-    price: "$120",
-    category: "Ensaladas",
-    img: "/menu/ensalada-tropical.jpg",
-  },
-  {
-    name: "Ensalada Bocanada",
-    desc: "Mix de lechugas, morrón, jitomate, zanahoria, aguacate y pechuga empanizada.",
-    price: "$180",
-    category: "Ensaladas",
-    img: "/menu/ensalada-bocanada.jpg",
-  },
-  {
-    name: "Burrata",
-    desc: "Arúgula, espinaca, jitomate cherry, queso burrata y aderezo de café.",
-    price: "$160",
-    category: "Ensaladas",
-    img: "/menu/burrata.jpg",
-  },
-  {
-    name: "Ensalada César",
-    desc: "Clásica con crutones, parmesano y pollo a la parrilla.",
-    price: "$140",
-    category: "Ensaladas",
-    img: "/menu/ensalada-cesar.jpg",
-  },
-
-  // 🔸 Pastas
-  {
-    name: "Fettuccini",
-    desc: "Pasta con salsa de tu elección: 4 quesos, bolognesa, pesto o al burro.",
-    price: "$149",
-    category: "Pastas",
-    img: "/menu/fettuccini.jpg",
-  },
-  {
-    name: "Fusilli",
-    desc: "Pasta con salsa de tu elección: 4 quesos, bolognesa, pesto o al burro.",
-    price: "$159",
-    category: "Pastas",
-    img: "/menu/fusilli.jpg",
-  },
-  {
-    name: "Ravioles",
-    desc: "7 piezas rellenas, con salsa de tu preferencia: 4 quesos, bolognesa o pesto.",
-    price: "$199",
-    category: "Pastas",
-    img: "/menu/ravioles.jpg",
-  },
-
-  // 🔸 Quesos Fundidos
-  {
-    name: "Queso Fundido con Chistorra",
-    desc: "180 gm de mix de quesos gourmet acompañados de chistorra.",
-    price: "$119",
-    category: "Quesos Fundidos",
-    img: "/menu/queso-fundido-chistorra.jpg",
-  },
-  {
-    name: "Queso Fundido con Arrachera",
-    desc: "180 gm de mix de quesos gourmet con arrachera a la brasa.",
-    price: "$139",
-    category: "Quesos Fundidos",
-    img: "/menu/queso-fundido-arrachera.jpg",
-  },
-  {
-    name: "Queso Fundido con Chorizo Argentino",
-    desc: "Queso fundido con toque de chorizo argentino.",
-    price: "$135",
-    category: "Quesos Fundidos",
-    img: "/menu/queso-fundido-chorizo.jpg",
-  },
-  {
-    name: "Queso Fundido con Champiñones",
-    desc: "Queso fundido con champiñones salteados al vino blanco.",
-    price: "$125",
-    category: "Quesos Fundidos",
-    img: "/menu/queso-fundido-champinon.jpg",
-  },
-
-  // 🔸 Hamburguesas
-  {
-    name: "Hamburguesa Bocanada",
-    desc: "Carne de res, queso Gouda, mayo chipotle, lechuga, jitomate, chorizo argentino y huevo estrellado.",
-    price: "$199",
-    category: "Hamburguesas",
-    img: "/menu/hamburguesa-bocanada.jpg",
-  },
-  {
-    name: "Hamburguesa Hawaiana",
-    desc: "Carne de res, queso Gouda, jamón de pavo y piña. Acompañada de papas fritas.",
-    price: "$189",
-    category: "Hamburguesas",
-    img: "/menu/hamburguesa-hawaiana.jpg",
-  },
-  {
-    name: "Hamburguesa Criolla",
-    desc: "Carne de res, huevo estrellado, lechuga, tomate, chorizo argentino y aderezo de ajo.",
-    price: "$189",
-    category: "Hamburguesas",
-    img: "/menu/hamburguesa-criolla.jpg",
-  },
-  {
-    name: "Hamburguesa de Champiñón",
-    desc: "Hamburguesa vegetariana con portobello, queso gouda y aderezo de la casa.",
-    price: "$175",
-    category: "Hamburguesas",
-    img: "/menu/hamburguesa-champinon.jpg",
-  },
-
-  // 🔸 Tacos y Sándwiches
-  {
-    name: "Tacos de Sirloin",
-    desc: "3 tacos de carne de sirloin con cebolla, chiles salteados y papas fritas.",
-    price: "$149",
-    category: "Tacos y Sándwiches",
-    img: "/menu/tacos-sirloin.jpg",
-  },
-  {
-    name: "Tacos de Pollo",
-    desc: "3 tacos de pollo a la parrilla con pico de gallo.",
-    price: "$135",
-    category: "Tacos y Sándwiches",
-    img: "/menu/tacos-pollo.jpg",
-  },
-  {
-    name: "Tacos de Arrachera",
-    desc: "3 tacos de arrachera marinada con cebolla y chiles salteados, acompañados de papas.",
-    price: "$149",
-    category: "Tacos y Sándwiches",
-    img: "/menu/tacos-arrachera.jpg",
-  },
-  {
-    name: "Choripán",
-    desc: "Chorizo argentino con aderezo mayo-chipotle, lechuga y jitomate.",
-    price: "$120",
-    category: "Tacos y Sándwiches",
-    img: "/menu/choripan.jpg",
-  },
-  {
-    name: "Choriqueso",
-    desc: "Chorizo argentino mezclado con queso fundido en pan artesanal.",
-    price: "$130",
-    category: "Tacos y Sándwiches",
-    img: "/menu/choriqueso.jpg",
-  },
-  {
-    name: "Sándwich de Arrachera",
-    desc: "Pan artesanal con arrachera, lechuga, tomate y aderezo de ajo.",
-    price: "$140",
-    category: "Tacos y Sándwiches",
-    img: "/menu/sandwich-arrachera.jpg",
-  },
-  {
-    name: "Sándwich Bocanada",
-    desc: "Pechuga a la parrilla con tocino, queso gouda y vegetales frescos.",
-    price: "$135",
-    category: "Tacos y Sándwiches",
-    img: "/menu/sandwich-bocanada.jpg",
-  },
-  {
-    name: "Chivito",
-    desc: "Clásico uruguayo con carne de res, jamón, huevo, tocino, lechuga y tomate.",
-    price: "$160",
-    category: "Tacos y Sándwiches",
-    img: "/menu/chivito.jpg",
-  },
-
-  // 🔸 Bebidas y Cocteles
-  {
-    name: "Mojito Natural",
-    desc: "Hierbabuena, limón, azúcar, ron y un toque de soda.",
-    price: "$120",
-    category: "Bebidas y Cocteles",
-    img: "/menu/mojito.jpg",
-  },
-  {
-    name: "Aperol Spritz",
-    desc: "Aperol, prosecco y soda con rodaja de naranja.",
-    price: "$150",
-    category: "Bebidas y Cocteles",
-    img: "/menu/aperol.jpg",
-  },
-  {
-    name: "Limonada de Hierbabuena",
-    desc: "Refrescante mezcla de limón natural con toque de hierbabuena.",
-    price: "$85",
-    category: "Bebidas y Cocteles",
-    img: "/menu/limonada-hierbabuena.jpg",
-  },
-];
-
-// =======================
-// 📤 EXPORTS
-// =======================
-export const getDishesByCategory = (category: string) => {
-  return DISHES.filter((dish) => dish.category === category);
-};
-
-export const getFeaturedDishes = () => {
-  return DISHES.filter((dish) => dish.category === "Favoritos del Chef");
-};
-
-export const getAllDishes = () => {
-  return DISHES;
-};
-
-function slugify(name: string) {
-  return name
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)+/g, "");
-}
-
-export const getDishBySlug = (slug: string) => {
-  return DISHES.find((dish) => slugify(dish.name) === slug);
+export const MENU_DATA: Record<string, Dish[]> = {
+  "Sopas y Entradas": [
+    {
+      id: "papa-parrilla",
+      name: "PAPA PARRILLA",
+      desc: "Horneada en mantequilla, con hierbas de olor, rellena de queso, tocino y crema",
+      price: 119,
+      image: "/menu/papa-parrilla.jpg",
+      category: "Sopas y Entradas",
+    },
+    {
+      id: "queso-provoletta",
+      name: "QUESO PROVOLETTA",
+      desc: "200 gr De queso provolone a la plancha con jitomate y orégano.",
+      price: 135,
+      image: "/menu/queso-provoleta.jpg",
+      category: "Sopas y Entradas",
+    },
+    {
+      id: "esparragos-envueltos",
+      name: "ESPÁRRAGOS ENVUELTOS",
+      desc: "Espárragos salteados, envueltos en tocino con una reducción de vino tinto con café.",
+      price: 99,
+      image: "/menu/esparragos-envueltos.jpg",
+      category: "Sopas y Entradas",
+    },
+    {
+      id: "aguachile-de-camaron",
+      name: "AGUACHILE DE CAMARÓN",
+      desc: "Tradicional aguachile verde, pepino, cebolla, aguacate, con el toque especial de la casa.",
+      price: 239,
+      image: "/menu/aguachile-camaron.jpg",
+      category: "Sopas y Entradas",
+    },
+    {
+      id: "tostadas-gemelas-de-atun",
+      name: "TOSTADAS GEMELAS DE ATÚN",
+      desc: "250 gr de atún aleta azul, pepino, cebolla, mango y aguacate.",
+      price: 199,
+      image: "/menu/tostadas-atun.jpg",
+      category: "Sopas y Entradas",
+    },
+    {
+      id: "jugo-de-carne",
+      name: "JUGO DE CARNE",
+      desc: "Tradicional jugo de carne con el secreto de la casa.",
+      price: 99,
+      image: "/menu/jugo-de-carne.jpg",
+      category: "Sopas y Entradas",
+    },
+    {
+      id: "fideo-seco",
+      name: "FIDEO SECO",
+      desc: "Delicioso fideo delgado, acompañado de crema, aguacate y queso panela.",
+      price: 79,
+      image: "/menu/fideo-seco.jpg",
+      category: "Sopas y Entradas",
+    },
+    {
+      id: "crema-conde-jj",
+      name: "CREMA CONDE J.J",
+      desc: "Deliciosa crema de frijol, acompañada de tocino y crema ácida.",
+      price: 79,
+      image: "/menu/crema-conde-jj.jpg",
+      category: "Sopas y Entradas",
+    },
+  ],
+  Empanadas: [
+    {
+      id: "empanada-de-carne",
+      name: "EMPANADA DE CARNE",
+      desc: "Carne molida con el toque de la casa.",
+      price: 52,
+      image: "/menu/empanada-carne.jpg",
+      category: "Empanadas",
+    },
+    {
+      id: "empanada-de-elote",
+      name: "EMPANADA DE ELOTE",
+      desc: "Grano de elote guisado en mantequilla con un mix de quesos.",
+      price: 52,
+      image: "/menu/empanada-elote.jpg",
+      category: "Empanadas",
+    },
+    {
+      id: "empanada-de-espinaca",
+      name: "EMPANADA DE ESPINACA",
+      desc: "Espinacas guisadas en mantequilla con queso doble crema.",
+      price: 52,
+      image: "/menu/empanada-espinaca.jpg",
+      category: "Empanadas",
+    },
+    {
+      id: "empanada-de-chistorra",
+      name: "EMPANADA DE CHISTORRA",
+      desc: "Chistorra a la parrilla con mix de quesos.",
+      price: 52,
+      image: "/menu/empanada-chistorra.jpg",
+      category: "Empanadas",
+    },
+    {
+      id: "empanada-hawaiana",
+      name: "EMPANADA HAWAIANA",
+      desc: "Jamón de pavo, piña y mix de quesos.",
+      price: 52,
+      image: "/menu/empanada-hawaiana.jpg",
+      category: "Empanadas",
+    },
+    {
+      id: "empanada-jamon",
+      name: "EMPANADA JAMÓN",
+      desc: "Jamón de pavo y mix de quesos.",
+      price: 52,
+      image: "/menu/empanada-jamon.jpg",
+      category: "Empanadas",
+    },
+  ],
+  "Quesos Fundidos": [
+    {
+      id: "queso-fundido-c-chistorra",
+      name: "QUESO FUNDIDO C/ CHISTORRA",
+      desc: "180 gr de mix de quesos gourmet acompañado de chistorra.",
+      price: 119,
+      image: "/menu/queso-fundido-chistorra.jpg",
+      category: "Quesos Fundidos",
+    },
+    {
+      id: "queso-fundido-c-arrachera",
+      name: "QUESO FUNDIDO C/ ARRACHERA",
+      desc: "180 gr de mix de quesos gourmet acompañado de arrachera.",
+      price: 139,
+      image: "/menu/queso-fundido-arrachera.jpg",
+      category: "Quesos Fundidos",
+    },
+    {
+      id: "queso-fundido-c-chorizo-argentino",
+      name: "QUESO FUNDIDO C/ CHORIZO ARGENTINO",
+      desc: "180 gr de mix de quesos gourmet acompañado de chorizo argentino.",
+      price: 119,
+      image: "/menu/queso-fundido-chorizo.jpg",
+      category: "Quesos Fundidos",
+    },
+    {
+      id: "queso-fundido-c-champinones",
+      name: "QUESO FUNDIDO C/ CHAMPIÑONES",
+      desc: "180 gr de mix de quesos gourmet acompañado de champiñones.",
+      price: 119,
+      image: "/menu/queso-fundido-champinon.jpg",
+      category: "Quesos Fundidos",
+    },
+  ],
+  Ensaladas: [
+    {
+      id: "ensalada-tropical",
+      name: "ENSALADA TROPICAL",
+      desc: "Mix de lechugas, arándano, nuez, frutos en almíbar, queso de cabra y aderezo de la casa.",
+      price: 120,
+      image: "/menu/ensalada-tropical.jpg",
+      category: "Ensaladas",
+    },
+    {
+      id: "ensalada-bocanada",
+      name: "ENSALADA BOCANADA",
+      desc: "Mix de lechugas, morrón, jitomate, zanahoria, aguacate, cebolla, aceitunas verdes, aceite de oliva, queso gouda, y pechuga empanizada (80 gr).",
+      price: 180,
+      image: "/menu/ensalada-bocanada.jpg",
+      category: "Ensaladas",
+    },
+    {
+      id: "burrata",
+      name: "BURRATA",
+      desc: "Arúgula, espinaca, jitomate cherry, queso burrata y aderezo de café.",
+      price: 160,
+      image: "/menu/burrata.jpg",
+      category: "Ensaladas",
+    },
+    {
+      id: "ensalada-cesar",
+      name: "ENSALADA CÉSAR",
+      desc: "Lechuga orejona con el tradicional aderezo cesar, acompañada de crutones, y queso parmesano.",
+      price: 160,
+      image: "/menu/ensalada-cesar.jpg",
+      category: "Ensaladas",
+    },
+  ],
+  "De Nuestra Brasa": [
+    {
+      id: "tomahawk-fire-1-kg",
+      name: "TOMAHAWK FIRE (1 kg)",
+      desc: "Flameado con mezcal en tabla de sal del Himalaya acompañado de papas cambray elote amarillo a la parrilla.",
+      price: 1499,
+      image: "/menu/tomahawk.jpg",
+      category: "De Nuestra Brasa",
+    },
+    {
+      id: "bife-de-chorizo-600-gr",
+      name: "BIFE DE CHORIZO 600 GR",
+      desc: "Exquisito bife de chorizo de 600 gr ideal para compartir, acompañado de ensalada mixta y papas a la francesa.",
+      price: 620,
+      image: "/menu/bife-de-chorizo.jpg",
+      category: "De Nuestra Brasa",
+    },
+    {
+      id: "parrillada-para-compartir",
+      name: "PARRILLADA PARA COMPARTIR",
+      desc: "Recomendado para compartir de 5 a 7 personas. 560 gr de arrachera, 560 gr de sirloin, 400 gr de chorizo argentino, 330 gr chistorra, 300 gr de pechuga de pollo, 12 Empanadas surtidas, 2 ensaladas, 2 órdenes de papas, Chiles toreados, Cebollas, Tortillas.",
+      price: 1999,
+      image: "/menu/parrillada.jpg",
+      category: "De Nuestra Brasa",
+    },
+    {
+      id: "new-york",
+      name: "NEW YORK",
+      desc: "280 gr de jugoso corte New York con guarnición de papas fritas o ensalada mixta.",
+      price: 329,
+      image: "/menu/new-york.jpg",
+      category: "De Nuestra Brasa",
+    },
+    {
+      id: "arrachera-parrilla",
+      name: "ARRACHERA PARRILLA",
+      desc: "280 gr de jugosa arrachera marinada con guarnición de papas fritas o ensalada mixta.",
+      price: 249,
+      image: "/menu/arrachera-parrilla.jpg",
+      category: "De Nuestra Brasa",
+    },
+    {
+      id: "bife-de-chorizo",
+      name: "BIFE DE CHORIZO",
+      desc: "280 gr con guarnición de papas fritas o ensalada mixta.",
+      price: 329,
+      image: "/menu/bife-de-chorizo.jpg",
+      category: "De Nuestra Brasa",
+    },
+    {
+      id: "sirloin",
+      name: "SIRLOIN",
+      desc: "280 gr con guarnición de papas fritas o ensalada mixta.",
+      price: 310,
+      image: "/menu/sirloin.jpg",
+      category: "De Nuestra Brasa",
+    },
+    {
+      id: "tira-de-asado",
+      name: "TIRA DE ASADO",
+      desc: "280 gr con guarnición de papas fritas o ensalada mixta.",
+      price: 319,
+      image: "/menu/tira-de-asado.jpg",
+      category: "De Nuestra Brasa",
+    },
+    {
+      id: "t-bone",
+      name: "T-BONE",
+      desc: "280 gr con guarnición de papas fritas o ensalada mixta.",
+      price: 329,
+      image: "/menu/t-bone.jpg",
+      category: "De Nuestra Brasa",
+    },
+    {
+      id: "salmon-a-las-brasas",
+      name: "SALMÓN A LAS BRASAS",
+      desc: "200 gr de salmón acompañado de puré de papa, espárragos salteados y reducción, de vinagre balsámico.",
+      price: 340,
+      image: "/menu/salmon-a-las-brasas.jpg",
+      category: "De Nuestra Brasa",
+    },
+    {
+      id: "camarones-a-las-brasas",
+      name: "CAMARONES A LAS BRASAS",
+      desc: "Camarones a la parrilla U15 (180 gr) con nuestra deliciosa mayonesa chipotle acompañados con ensalada mixta.",
+      price: 340,
+      image: "/menu/camarones-a-las-brasas.jpg",
+      category: "De Nuestra Brasa",
+    },
+    {
+      id: "steak-de-atun",
+      name: "STEAK DE ATÚN",
+      desc: "Medallón de atún (200 gr) a la parrilla aderezado con una salsa de chipotle.",
+      price: 249,
+      image: "/menu/steak-de-atun.jpg",
+      category: "De Nuestra Brasa",
+    },
+  ],
+  "Hamburguesas y Sándwiches": [
+    {
+      id: "hamburguesa-bocanada",
+      name: "HAMBURGUESA BOCANADA",
+      desc: "Jugosa carne de res gratinada con queso gouda, aderezo de mayochipotle, lechuga, jitomate, chorizo argentino y huevo estrellado acompañada de papas fritas.",
+      price: 199,
+      image: "/menu/hamburguesa-bocanada.jpg",
+      category: "Hamburguesas y Sándwiches",
+    },
+    {
+      id: "hamburguesa-hawaiana",
+      name: "HAMBURGUESA HAWAIANA",
+      desc: "Jugosa carne de res gratinada con queso gouda, aderezo de mayochipotle, lechuga, jitomate, jamón de pavo y piña acompañada de papas fritas.",
+      price: 189,
+      image: "/menu/hamburguesa-hawaiana.jpg",
+      category: "Hamburguesas y Sándwiches",
+    },
+    {
+      id: "hamburguesa-criolla",
+      name: "HAMBURGUESA CRIOLLA",
+      desc: "Jugosa carne de res gratinada con queso gouda, aderezo de mayochipotle, lechuga, jitomate y tocino acompañada de papas fritas.",
+      price: 189,
+      image: "/menu/hamburguesa-criolla.jpg",
+      category: "Hamburguesas y Sándwiches",
+    },
+    {
+      id: "hamburguesa-de-champinon",
+      name: "HAMBURGUESA DE CHAMPIÑON",
+      desc: "Jugosa carne de res gratinada con queso gouda, aderezo de mayochipotle, lechuga, jitomate y champiñones salteados acompañada de papas fritas.",
+      price: 179,
+      image: "/menu/hamburguesa-champinon.jpg",
+      category: "Hamburguesas y Sándwiches",
+    },
+    {
+      id: "choripan",
+      name: "CHORIPÁN",
+      desc: "Chorizo argentino, con aderezo mayo-chipotle, lechuga y jitomate.",
+      price: 120,
+      image: "/menu/choripan.jpg",
+      category: "Hamburguesas y Sándwiches",
+    },
+    {
+      id: "choriqueso",
+      name: "CHORIQUESO",
+      desc: "Chorizo argentino gratinado con queso gouda, aderezo mayo chipotle, lechuga, jitomate acompañado de papas fritas.",
+      price: 130,
+      image: "/menu/choriqueso.jpg",
+      category: "Hamburguesas y Sándwiches",
+    },
+    {
+      id: "sandwich-arrachera",
+      name: "SANDWICH ARRACHERA",
+      desc: "Jugosa carne de arrachera, gratinados con queso gouda, aderezo mayo-chipotle, lechuga y jitomate acompañado con papas fritas.",
+      price: 179,
+      image: "/menu/sandwich-arrachera.jpg",
+      category: "Hamburguesas y Sándwiches",
+    },
+    {
+      id: "sandwich-bocanada",
+      name: "SANDWICH BOCANADA",
+      desc: "Jugosa carne de arrachera con chorizo argentino, gratinado con queso gouda, aderezo mayo-chipotle, lechuga y jitomate acompañado con papas fritas.",
+      price: 189,
+      image: "/menu/sandwich-bocanada.jpg",
+      category: "Hamburguesas y Sándwiches",
+    },
+    {
+      id: "chivito",
+      name: "CHIVITO",
+      desc: "Sirloin, chorizo argentino, huevo, tocino, chistorra, acompañado con papas fritas.",
+      price: 189,
+      image: "/menu/chivito.jpg",
+      category: "Hamburguesas y Sándwiches",
+    },
+    {
+      id: "tacos-de-sirloin",
+      name: "TACOS DE SIRLOIN",
+      desc: "3 tacos de jugosa carne de sirloin (180 gr) con cebolla y chiles salteados, acompañados con papas fritas.",
+      price: 149,
+      image: "/menu/tacos-sirloin.jpg",
+      category: "Hamburguesas y Sándwiches",
+    },
+    {
+      id: "tacos-de-pollo",
+      name: "TACOS DE POLLO",
+      desc: "3 tacos de pechuga de pollo (180 gr) con cebolla y chiles salteados, acompañados con papas fritas.",
+      price: 149,
+      image: "/menu/tacos-pollo.jpg",
+      category: "Hamburguesas y Sándwiches",
+    },
+    {
+      id: "tacos-de-arrachera",
+      name: "TACOS DE ARRACHERA",
+      desc: "3 tacos de arrachera marinada (180 gr) con cebolla y chiles salteados, acompañados con papas fritas.",
+      price: 149,
+      image: "/menu/tacos-arrachera.jpg",
+      category: "Hamburguesas y Sándwiches",
+    },
+  ],
+  "Pastas y Pizzas": [
+    {
+      id: "fetuccini",
+      name: "FETUCCINI",
+      desc: "200 gr de pasta con la salsa de su preferencia (4 quesos, bolognesa, pesto de albhaca o al burro).",
+      price: 149,
+      image: "/menu/fetuccini.jpg",
+      category: "Pastas y Pizzas",
+    },
+    {
+      id: "fusilli",
+      name: "FUSILLI",
+      desc: "200 gr de pasta con la salsa de su preferencia (4 quesos, bolognesa, pesto de albhaca o al burro).",
+      price: 159,
+      image: "/menu/fusilli.jpg",
+      category: "Pastas y Pizzas",
+    },
+    {
+      id: "ravioles",
+      name: "RAVIOLES",
+      desc: "7 pzs con la salsa de tu preferencia (4 quesos, bolognesa, pesto de albhaca o al burro).",
+      price: 199,
+      image: "/menu/ravioles.jpg",
+      category: "Pastas y Pizzas",
+    },
+    {
+      id: "canelones",
+      name: "CANELONES",
+      desc: "De carne o espinaca bañados en salsa pomodoro, gratinados con queso gouda y parmesano rallado.",
+      price: 185,
+      image: "/menu/canelones.jpg",
+      category: "Pastas y Pizzas",
+    },
+    {
+      id: "lasagna-uruguaya",
+      name: "LASAGNA URUGUAYA",
+      desc: "Típica lasagna casera uruguaya con carne o espinaca bañada con salsa pomodoro y gratinada con queso gouda y parmesano.",
+      price: 199,
+      image: "/menu/lasagna-uruguaya.jpg",
+      category: "Pastas y Pizzas",
+    },
+    {
+      id: "pizza-maui",
+      name: "PIZZA MAUI",
+      desc: "Mix de quesos, salsa pomodoro, jamón y piña.",
+      price: 218,
+      image: "/menu/pizza-maui.jpg",
+      category: "Pastas y Pizzas",
+    },
+    {
+      id: "pizza-bocanada",
+      name: "PIZZA BOCANADA",
+      desc: "Mix de quesos, salsa pomodoro, arrachera, chorizo argentino y tocino.",
+      price: 279,
+      image: "/menu/pizza-bocanada.jpg",
+      category: "Pastas y Pizzas",
+    },
+    {
+      id: "pizza-pepperoni",
+      name: "PIZZA PEPPERONI",
+      desc: "Mix de quesos, salsa pomodoro y peperoni.",
+      price: 210,
+      image: "/menu/pizza-pepperoni.jpg",
+      category: "Pastas y Pizzas",
+    },
+    {
+      id: "pizza-margarita",
+      name: "PIZZA MARGARITA",
+      desc: "Mix de quesos, salsa pomodoro, jitomate y aceitunas negras.",
+      price: 199,
+      image: "/menu/pizza-margarita.jpg",
+      category: "Pastas y Pizzas",
+    },
+    {
+      id: "pizza-punta-del-este",
+      name: "PIZZA PUNTA DEL ESTE",
+      desc: "Mix de quesos, salsa pomodoro, jamón, pimiento morrón y aceitunas verdes.",
+      price: 199,
+      image: "/menu/pizza-punta-del-este.jpg",
+      category: "Pastas y Pizzas",
+    },
+    {
+      id: "pizza-4-quesos",
+      name: "PIZZA 4 QUESOS",
+      desc: "Queso mozarella, queso gouda, queso azul, queso parmesano y salsa pomodoro.",
+      price: 239,
+      image: "/menu/pizza-4-quesos.jpg",
+      category: "Pastas y Pizzas",
+    },
+    {
+      id: "pizza-champinones",
+      name: "PIZZA CHAMPIÑONES",
+      desc: "Mix de quesos, salsa pomodoro y champiñones salteados en mantequilla.",
+      price: 210,
+      image: "/menu/pizza-champinones.jpg",
+      category: "Pastas y Pizzas",
+    },
+  ],
+  Postres: [
+    {
+      id: "alfajor",
+      name: "ALFAJOR",
+      desc: "De maizena o chocolate relleno de dulce de leche, espolvoreado de azúcar glass y un espejo de chocolate líquido.",
+      price: 69,
+      image: "/menu/alfajor.jpg",
+      category: "Postres",
+    },
+    {
+      id: "pastel-de-chocolate",
+      name: "PASTEL DE CHOCOLATE",
+      desc: "Pastel de chocolate espolvoreado de azúcar glass y un espejo de chocolate líquido.",
+      price: 120,
+      image: "/menu/pastel-de-chocolate.jpg",
+      category: "Postres",
+    },
+    {
+      id: "panque-helado",
+      name: "PANQUE HELADO",
+      desc: "Tres rollos de crepa rellenos de dulce de leche o crema de avellana con 2 bolas de helado de vainilla.",
+      price: 120,
+      image: "/menu/panque-helado.jpg",
+      category: "Postres",
+    },
+    {
+      id: "empanada-de-dulce-de-leche",
+      name: "EMPANADA DE DULCE DE LECHE",
+      desc: "Rellena de dulce de leche artesanal.",
+      price: 52,
+      image: "/menu/empanada-de-dulce-de-leche.jpg",
+      category: "Postres",
+    },
+    {
+      id: "empanada-de-crema-de-avellana",
+      name: "EMPANADA DE CREMA DE AVELLANA",
+      desc: "Rellena de crema de avellana.",
+      price: 52,
+      image: "/menu/empanada-de-crema-de-avellana.jpg",
+      category: "Postres",
+    },
+    {
+      id: "empanada-de-queso-crema-y-zarzamora",
+      name: "EMPANADA DE QUESO CREMA Y ZARZAMORA",
+      desc: "Rellena de queso crema y mermelada artesanal de zarzamora.",
+      price: 52,
+      image: "/menu/empanada-de-queso-crema-y-zarzamora.jpg",
+      category: "Postres",
+    },
+    {
+      id: "affogato",
+      name: "AFFOGATO",
+      desc: "Crema de avellana congelada, con dos bolas de helado, una carga de café expreso espolvoreado con nuez picada.",
+      price: 120,
+      image: "/menu/affogato.jpg",
+      category: "Postres",
+    },
+    {
+      id: "vigilante",
+      name: "VIGILANTE",
+      desc: "Ate de guayaba con queso manchego.",
+      price: 89,
+      image: "/menu/vigilante.jpg",
+      category: "Postres",
+    },
+    {
+      id: "crepas-cajeta",
+      name: "CREPAS CAJETA",
+      desc: "4 crepas flameadas en tu mesa con la receta secreta.",
+      price: 190,
+      image: "/menu/crepas-cajeta.jpg",
+      category: "Postres",
+    },
+    {
+      id: "mousse-de-cajeta",
+      name: "MOUSSE DE CAJETA",
+      desc: "Mousse de cajeta con tierra de chocolate y buñuelos con azúcar.",
+      price: 119,
+      image: "/menu/mousse-de-cajeta.jpg",
+      category: "Postres",
+    },
+  ],
+  Bebidas: [
+    {
+      id: "coca-cola",
+      name: "Coca Cola",
+      desc: "",
+      price: 42,
+      image: "/menu/refresco.jpg",
+      category: "Bebidas",
+    },
+    {
+      id: "jamaica",
+      name: "Jamaica",
+      desc: "",
+      price: 42,
+      image: "/menu/agua-jamaica.jpg",
+      category: "Bebidas",
+    },
+    {
+      id: "americano",
+      name: "Americano",
+      desc: "",
+      price: 48,
+      image: "/menu/cafe-americano.jpg",
+      category: "Bebidas",
+    },
+    {
+      id: "doble-menta",
+      name: "Doble menta",
+      desc: "",
+      price: 45,
+      image: "/menu/te-menta.jpg",
+      category: "Bebidas",
+    },
+    {
+      id: "limonada",
+      name: "Limonada",
+      desc: "",
+      price: 42,
+      image: "/menu/limonada.jpg",
+      category: "Bebidas",
+    },
+    {
+      id: "don-simon-tempranillo",
+      name: "Don Simon Tempranillo",
+      desc: "Botella $270, Copa $65",
+      price: 270,
+      image: "/menu/vino-tinto.jpg",
+      category: "Bebidas",
+    },
+    {
+      id: "diamante",
+      name: "Diamante",
+      desc: "Botella $550",
+      price: 550,
+      image: "/menu/vino-blanco.jpg",
+      category: "Bebidas",
+    },
+    {
+      id: "corona",
+      name: "Corona",
+      desc: "",
+      price: 48,
+      image: "/menu/cerveza-corona.jpg",
+      category: "Bebidas",
+    },
+    {
+      id: "corona-caguama",
+      name: "Corona (Caguama)",
+      desc: "",
+      price: 15,
+      image: "/menu/caguama-corona.jpg",
+      category: "Bebidas",
+    },
+  ],
 };

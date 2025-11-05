@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import MiniReserva from "@/components/MiniReserva";
+import HomeMenuSection from "@/components/HomeMenuSection";
 
 export default function HomePage() {
   return (
@@ -92,6 +93,37 @@ export default function HomePage() {
         </div>
       </section>
 
+      <HomeMenuSection />
+
+      {/* 🎉 Aniversario Banner */}
+      <section className="relative w-full h-[50vh] overflow-hidden">
+        <video
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          src="/aniversario.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
+          <h2 className="text-3xl md:text-5xl font-bold text-amber-400">
+            ¡Nuestro Aniversario se Celebra en Grande!
+          </h2>
+          <p className="mt-3 text-lg text-gray-200 max-w-2xl">
+            Música en vivo, menú especial y el ambiente que nos caracteriza. No te quedes fuera de la celebración más importante del año.
+          </p>
+          <div className="mt-6">
+            <Link
+              href="/reservar"
+              className="px-8 py-3 bg-amber-600 rounded-md text-white font-bold text-lg hover:bg-amber-700 transition-transform hover:scale-105"
+            >
+              Reserva tu Lugar
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Sección de Promoción */}
       <MiniReserva />
 
@@ -139,36 +171,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* 🎄 Cena de Fin de Año */}
-            <div className="group bg-white dark:bg-[#2A2A2A] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-              <div className="relative w-full h-56">
-                <Image
-                  src="/eventos/promo-navidad.jpg"
-                  alt="Cena de Fin de Año"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute top-3 left-3 bg-[#DAA520] text-black font-bold px-3 py-1 rounded-full text-xs uppercase">
-                  Cena Especial
-                </div>
-              </div>
-              <div className="p-6 text-left">
-                <h3 className="text-lg font-bold mb-2 text-[#a22e2e]">
-                  🎄 Cena de Fin de Año
-                </h3>
-                <p className="text-sm mb-4 text-slate-700 dark:text-slate-300">
-                  Despide el año con una cena exclusiva y maridaje especial. ¡Asegura
-                  tu mesa antes del 31 de diciembre!...
-                </p>
-                <Link
-                  href="/reservar"
-                  className="text-[#f24a0d] font-bold hover:text-[#d93d0b] transition-colors"
-                >
-                  Reservar →
-                </Link>
-              </div>
-            </div>
-
             {/* 🍸 Happy Hour */}
             <div className="group bg-white dark:bg-[#2A2A2A] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
               <div className="relative w-full h-56">
@@ -198,6 +200,36 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
+
+            {/* 🎄 Cena de Fin de Año */}
+            <div className="group bg-white dark:bg-[#2A2A2A] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+              <div className="relative w-full h-56">
+                <Image
+                  src="/eventos/promo-navidad.jpg"
+                  alt="Cena de Fin de Año"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute top-3 left-3 bg-[#DAA520] text-black font-bold px-3 py-1 rounded-full text-xs uppercase">
+                  Cena Especial
+                </div>
+              </div>
+              <div className="p-6 text-left">
+                <h3 className="text-lg font-bold mb-2 text-[#a22e2e]">
+                  🎄 Cena de Fin de Año
+                </h3>
+                <p className="text-sm mb-4 text-slate-700 dark:text-slate-300">
+                  Despide el año con una cena exclusiva y maridaje especial. ¡Asegura
+                  tu mesa antes del 31 de diciembre!...
+                </p>
+                <Link
+                  href="/reservar"
+                  className="text-[#f24a0d] font-bold hover:text-[#d93d0b] transition-colors"
+                >
+                  Reservar →
+                </Link>
+              </div>
+            </div>
           </div>
 
           <Link
@@ -219,7 +251,7 @@ export default function HomePage() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {Array.from({ length: 7 }).map((_, i) => (
+          {Array.from({ length: 8 }).map((_, i) => (
             <Image
               key={i}
               src={`/ambiente${i + 1}.jpg`}

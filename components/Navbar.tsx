@@ -7,6 +7,7 @@ import { useState } from "react";
 import { UserCircle2 } from "lucide-react";
 
 const LINKS = [
+  { href: "/", label: "Inicio" },
   { href: "/menu", label: "Menú" },
   { href: "/#promo", label: "Promos" },
   { href: "/#galeria", label: "Galería" },
