@@ -11,7 +11,7 @@
 | Navbar Global | ✅ Activo | Limpio, con link a Inicio y menú completo. Menú de hamburguesa en mobile. |
 | Footer Global | ✅ Activo | Unificado con redes, teléfono, WhatsApp, dirección, copyright. |
 | Home (page.tsx) | ✅ Completo | Hero con video, Favoritos, Menú interactivo, Banner Aniversario y galería. |
-| Menú (menu/page.tsx) | ✅ Completo y Rediseñado | Menú completo extraído de PDFs, con diseño premium y categorías agrupadas. |
+| Menú (menu/page.tsx) | ✅ Mejorado | Menú completo con diseño premium, categorías agrupadas y búsqueda en tiempo real. |
 | Reservar (reservar/page.tsx) | ✅ Funcional | Formulario completo con envío de correos y notificaciones de Telegram. |
 | Autenticación / Club | ✅ Implementada | “Únete al Club” redirige correctamente al registro (Supabase). |
 | Responsive / Mobile UX | ✅ Mejorado | Navbar con menú de hamburguesa, mejoras en banners y componentes de calendario. |
@@ -24,7 +24,7 @@
 | :--- | :--- | :--- |
 | Datos del Menú | ✅ Centralizado | Toda la información del menú reside en `lib/menu-data.ts`. |
 | Menú en Home | ✅ Funcional | Sección interactiva con pestañas por categoría y 3 platillos destacados. |
-| Página de Menú | ✅ Funcional | Página completa con diseño premium, mostrando todos los platillos por categoría. |
+| Página de Menú | ✅ Mejorada | Página completa con diseño premium, mostrando todos los platillos por categoría y con búsqueda en tiempo real. |
 | Sincronización | ✅ OK | Ambas secciones (Home y /menu) consumen los mismos datos, asegurando consistencia. |
 
 ---
@@ -44,6 +44,7 @@
 
 | Fecha | Cambio aplicado | Archivos |
 | :--- | :--- | :--- |
+| 6 Nov 2025 | Implementación de búsqueda en tiempo real en la página de menú. | `app/menu/page.tsx` |
 | 6 Nov 2025 | Mejoras de UX en mobile: menú de hamburguesa, calendario y banner de aniversario. | `app/page.tsx`, `components/Navbar.tsx`, `components/MiniReserva.tsx` |
 | 5 Nov 2025 | Reestructuración completa del menú y página de inicio. | `app/page.tsx`, `app/menu/page.tsx`, `lib/menu-data.ts` |
 | 5 Nov 2025 | Creación de componente de menú interactivo para el Home. | `components/HomeMenuSection.tsx` |
