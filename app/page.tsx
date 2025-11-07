@@ -147,7 +147,7 @@ export default function HomePage() {
             <div className="group bg-white dark:bg-[#2A2A2A] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
               <div className="relative w-full h-56">
                 <Image
-                  src="/eventos/bocanada-aniversario.jpg?v=2"
+                  src="/bocaniversary.jpg"
                   alt="Aniversario Bocanada"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -177,7 +177,7 @@ export default function HomePage() {
             <div className="group bg-white dark:bg-[#2A2A2A] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
               <div className="relative w-full h-56">
                 <Image
-                  src="/eventos/happy-hour.jpg"
+                  src="/horafeliz.jpg"
                   alt="Happy Hour Bocanada"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
