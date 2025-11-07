@@ -107,12 +107,14 @@ export default function HomePage() {
         />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
-          <h2 className="text-3xl md:text-5xl font-bold text-amber-400">
-            ¡Nuestro Aniversario se Celebra en Grande!
-          </h2>
-          <p className="mt-3 text-lg text-gray-200 max-w-2xl">
-            Música en vivo, menú especial y el ambiente que nos caracteriza. No te quedes fuera de la celebración más importante del año.
-          </p>
+          <div className="md:block hidden">
+            <h2 className="text-3xl md:text-5xl font-bold text-amber-400">
+              ¡Nuestro Aniversario se Celebra en Grande!
+            </h2>
+            <p className="mt-3 text-lg text-gray-200 max-w-2xl">
+              Música en vivo, menú especial y el ambiente que nos caracteriza. No te quedes fuera de la celebración más importante del año.
+            </p>
+          </div>
           <div className="mt-6">
             <Link
               href="/reservar"
@@ -145,7 +147,7 @@ export default function HomePage() {
             <div className="group bg-white dark:bg-[#2A2A2A] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
               <div className="relative w-full h-56">
                 <Image
-                  src="/eventos/bocanada-aniversario.jpg"
+                  src="/eventos/bocanada-aniversario.jpg?v=2"
                   alt="Aniversario Bocanada"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
