@@ -132,7 +132,7 @@ export default function HomePage() {
       {/* =======================
       📅 EVENTOS Y PROMOCIONES
       ======================= */}
-      <section className="py-16 bg-[#f8f6f5] dark:bg-[#1A1A1A]">
+      <section id="eventos-y-promociones" className="py-16 bg-[#f8f6f5] dark:bg-[#1A1A1A]">
         <div className="max-w-6xl mx-auto text-center px-4">
           <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 text-[#a22e2e]">
             Eventos y Promociones
@@ -233,18 +233,11 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-
-          <Link
-            href="/eventos"
-            className="inline-block bg-[#f24a0d] hover:bg-[#d93d0b] text-white px-6 py-3 rounded-xl font-semibold transition-all"
-          >
-            Ver todos los eventos
-          </Link>
         </div>
       </section>
 
       {/* 📸 Momentos de la parrilla */}
-      <section className="max-w-7xl mx-auto py-16 px-6">
+      <section id="momentos-de-la-parrilla" className="max-w-7xl mx-auto py-16 px-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold">Momentos de la parrilla</h2>
           <Link href="#" className="text-amber-500 hover:underline">

@@ -9,8 +9,8 @@ import { UserCircle2, Menu, X } from "lucide-react"; // Import Menu and X
 const LINKS = [
   { href: "/", label: "Inicio" },
   { href: "/menu", label: "Menú" },
-  { href: "/#promo", label: "Promos" },
-  { href: "/#galeria", label: "Galería" },
+  { href: "/#eventos-y-promociones", label: "Promos" },
+  { href: "/#momentos-de-la-parrilla", label: "Galería" },
   { href: "/eventos", label: "Eventos" },
   { href: "/reservar", label: "Reservar" },
   { href: "https://www.ubereats.com/mx/store/bocanada-cocina-de-brassa/FSlEl8NzWxuw0LJ49jfXYA", label: "Delivery", external: true },
