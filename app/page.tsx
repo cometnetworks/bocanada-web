@@ -239,7 +239,7 @@ export default function HomePage() {
       {/* 📸 Momentos de la parrilla */}
       <section id="momentos-de-la-parrilla" className="max-w-7xl mx-auto py-16 px-6">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold">Momentos de la parrilla</h2>
+          <h2 className="text-2xl font-semibold">Así se Vive Bocanada</h2>
           <Link href="#" className="text-amber-500 hover:underline">
             Subir foto →
           </Link>
