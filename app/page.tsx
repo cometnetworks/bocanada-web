@@ -99,7 +99,7 @@ export default function HomePage() {
       <section className="relative w-full h-[50vh] overflow-hidden">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover"
-          src="/aniversario.mp4"
+          src="/newyear-comidas.mp4"
           autoPlay
           muted
           loop
@@ -109,10 +109,10 @@ export default function HomePage() {
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
           <div className="md:block hidden">
             <h2 className="text-3xl md:text-5xl font-bold text-amber-400">
-              ¡Nuestro Aniversario se Celebra en Grande!
+              ¡Cenas de Fin de Año para Empresas!
             </h2>
             <p className="mt-3 text-lg text-gray-200 max-w-2xl">
-              Música en vivo, menú especial y el ambiente que nos caracteriza. No te quedes fuera de la celebración más importante del año.
+              Celebra con tu equipo en Bocanada. Menús especiales, ambiente exclusivo y la mejor brasa para despedir el año.
             </p>
           </div>
           <div className="mt-6">
