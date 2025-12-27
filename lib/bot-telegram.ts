@@ -4,9 +4,7 @@
 const token = process.env.TELEGRAM_BOT_TOKEN;
 const chatId = process.env.TELEGRAM_CHAT_ID;
 
-if (!token || !chatId) {
-  console.warn("⚠️ Telegram no está configurado: falta TELEGRAM_BOT_TOKEN o TELEGRAM_CHAT_ID");
-}
+// La validación se hace al intentar enviar el mensaje para evitar logs innecesarios durante el build.
 
 export async function sendTelegramMessage(message: string) {
   if (!token || !chatId) {

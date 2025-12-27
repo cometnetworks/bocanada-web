@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { sendTelegramMessage } from "@/lib/bot-telegram";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Inicialización segura para build time
+const resend = new Resend(process.env.RESEND_API_KEY || "re_123456789");
 
 export async function POST(req: Request) {
   try {
