@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from "@/utils/supabase/client";
 
 type Reserva = {
   id: string;
@@ -22,11 +22,8 @@ export default function DashboardReservas() {
   const [busqueda, setBusqueda] = useState("");
   const [loading, setLoading] = useState(true);
 
-  // 🔗 Inicializa conexión a Supabase
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  // 🔗 Inicializa conexión a Supabase usando el cliente compartido
+  const supabase = createClient();
 
   // 🚀 Cargar reservas al iniciar
   useEffect(() => {
