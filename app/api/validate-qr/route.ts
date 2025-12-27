@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseServer";
 
+export const runtime = "edge";
+
 export async function POST(req: Request) {
   try {
     const { qr, secret } = await req.json();

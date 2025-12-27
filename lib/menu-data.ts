@@ -643,3 +643,8 @@ export const MENU_DATA: Record<string, Dish[]> = {
     },
   ],
 };
+
+export function getDishBySlug(slug: string): Dish | undefined {
+  const allDishes = Object.values(MENU_DATA).flat();
+  return allDishes.find((dish) => dish.id === slug);
+}

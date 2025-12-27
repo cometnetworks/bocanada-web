@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+
+export const runtime = "edge";
 import { sendTelegramMessage } from "@/lib/bot-telegram";
 
 // Inicialización segura para build time

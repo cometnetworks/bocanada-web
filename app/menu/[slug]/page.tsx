@@ -1,9 +1,11 @@
 import { getDishBySlug } from "../../../lib/menu-data";
 import { slugify } from "../../../lib/slug";
 
-export default function DishDetail({ params }: { params: { slug: string } }){
+export const runtime = "edge";
+
+export default function DishDetail({ params }: { params: { slug: string } }) {
   const dish = getDishBySlug(params.slug);
-  if(!dish){
+  if (!dish) {
     return (
       <main className="min-h-screen bg-[#0b0c0e] text-white grid place-items-center p-10 text-center">
         <div>
@@ -15,13 +17,13 @@ export default function DishDetail({ params }: { params: { slug: string } }){
     );
   }
 
-  const img = dish.img || `https://placehold.co/1200x800/222/FFF?text=${encodeURIComponent(dish.name)}`;
+  const img = dish.image || `https://placehold.co/1200x800/222/FFF?text=${encodeURIComponent(dish.name)}`;
 
   return (
     <main className="min-h-screen bg-[#0b0c0e] text-white">
       <header className="sticky top-0 z-30 bg-black/60 backdrop-blur border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-2"><img src="/bocanada-logo.png" alt="Bocanada" className="h-8"/></a>
+          <a href="/" className="flex items-center gap-2"><img src="/bocanada-logo.png" alt="Bocanada" className="h-8" /></a>
           <nav className="hidden md:flex gap-6 text-sm">
             <a href="/menu" className="text-orange-300">Menú</a>
             <a href="/home#club" className="hover:text-orange-300">Bocanada Club</a>
